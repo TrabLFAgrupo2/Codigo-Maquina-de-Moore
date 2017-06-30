@@ -1,0 +1,157 @@
+﻿/* 
+
+numero -> (+ | -)?(0 | ... | 9)+(.(0 | ... | 9)+)?
+
+Σ ->(a..z,A..Z,0..9)
+conj_op (+, -, *, /, %, ^, &, |, &&, ||, <<, >>, +=, -=, *=, /=, %=, ^=, &=, |=, <<=, >>=, <, >, <=, >=, ==, !=)
+conj_un - OPERADORES UNITARIOS (++, --)
+*/
+digraph AFD {
+	rankdir=LR;
+	size="30"
+	node [shape = circle];
+ 
+      /* determinação dos estados de classificação (estados
+         finais) da máquina de Moore */
+      subgraph cluster1 { /* numere sequencialmente... */
+         node [shape = doublecircle]; 
+         q1               /* mude esta linha: nome do estado */
+         label = "<ATRIB>"; /* mude esta linha: descrição do token*/
+         color=white 
+      }
+      subgraph cluster2 {  
+         node [shape = doublecircle]; 
+         q2               /* mude esta linha: nome do estado */
+         label = "<OP>"; /* mude esta linha: descrição do token*/
+         color=white 
+      }
+     subgraph cluster3 {  
+         node [shape = doublecircle]; 
+         q3               /* mude esta linha: nome do estado */
+         label = "<OP_UN_AD>"; /* mude esta linha: descrição do token*/
+         color=white 
+      }
+     subgraph cluster4 {  
+         node [shape = doublecircle]; 
+         q4               /* mude esta linha: nome do estado */
+         label = "<DOIS-PT>"; /* mude esta linha: descrição do token*/
+         color=white 
+      }
+     subgraph cluster5 {  
+         node [shape = doublecircle]; 
+         q5              /* mude esta linha: nome do estado */
+         label = "<FCH>"; /* mude esta linha: descrição do token*/
+         color=white 
+      }
+     subgraph cluster6 {  
+         node [shape = doublecircle]; 
+         q6               /* mude esta linha: nome do estado */
+         label = "<ACH>"; /* mude esta linha: descrição do token*/
+         color=white 
+      }
+      subgraph cluster7 {  
+         node [shape = doublecircle]; 
+         q7               /* mude esta linha: nome do estado */
+         label = "<FP>"; /* mude esta linha: descrição do token*/
+         color=white 
+      }
+      subgraph cluster8 {  
+         node [shape = doublecircle]; 
+         q8               /* mude esta linha: nome do estado */
+         label = "<AP>"; /* mude esta linha: descrição do token*/
+         color=white 
+      }
+    subgraph cluster9 {  
+         node [shape = doublecircle]; 
+         q9               /* mude esta linha: nome do estado */
+         label = "<PT-VIRG>"; /* mude esta linha: descrição do token*/
+         color=white 
+      }
+     subgraph cluster14 {  
+         node [shape = doublecircle]; 
+         q14               /* mude esta linha: nome do estado */
+         label = "<WHILE>"; /* mude esta linha: descrição do token*/
+         color=white 
+      }
+      subgraph cluster17 {  
+         node [shape = doublecircle]; 
+         q17               /* mude esta linha: nome do estado */
+         label = "<FOR>"; /* mude esta linha: descrição do token*/
+         color=white 
+      }
+    subgraph cluster19 {  
+         node [shape = doublecircle]; 
+         q19               /* mude esta linha: nome do estado */
+         label = "<IF>"; /* mude esta linha: descrição do token*/
+         color=white 
+      }
+         subgraph cluster21 {  
+         node [shape = doublecircle]; 
+         q21               /* mude esta linha: nome do estado */
+         label = "<DO>"; /* mude esta linha: descrição do token*/
+         color=white 
+      }
+   subgraph cluster27 {  
+         node [shape = doublecircle]; 
+         q27               /* mude esta linha: nome do estado */
+         label = "<SWITCH>"; /* mude esta linha: descrição do token*/
+         color=white 
+      }
+    subgraph cluster31 {  
+         node [shape = doublecircle]; 
+         q31               /* mude esta linha: nome do estado */
+         label = "<CASE>"; /* mude esta linha: descrição do token*/
+         color=white 
+      }
+   subgraph cluster32 {  
+         node [shape = doublecircle]; 
+         q32               /* mude esta linha: nome do estado */
+         label = "<IDENT>"; /* mude esta linha: descrição do token*/
+         color=white 
+      }
+   subgraph cluster34 {  
+         node [shape = doublecircle]; 
+         q34               /* mude esta linha: nome do estado */
+         label = "<INTEGER>"; /* mude esta linha: descrição do token*/
+         color=white 
+      }
+  subgraph cluster35 {  
+         node [shape = doublecircle]; 
+         q35               /* mude esta linha: nome do estado */
+         label = "<REAL>"; /* mude esta linha: descrição do token*/
+         color=white 
+      }
+ 
+
+
+      q0 -> q1 [ label = "=" ];
+      q0 -> q2 [ label = "conj_op" ];
+      q0 -> q3 [label = "conj_un" ]; 
+      q0 -> q4 [label = ";" ];
+      q0 -> q5 [label = "}" ]; 
+      q0 -> q6 [label = "{" ]; 
+      q0 -> q7 [label = ")" ]; 
+      q0 -> q8 [label = "(" ]; 
+      q0 -> q9 [label = ";" ];
+      q0 -> q10 [label = "w" ];q10 -> q11 [label = "h" ]; q11 -> q12 [label = "i" ]; q12 -> q13 [label = "l" ];q13 -> q14 [label = "e" ];q14 -> q32 [label = "Σ" ];
+      q0 -> q15 [label = "f" ];q15 -> q16 [label = "o" ]; q16 -> q17 [label = "r" ];q17 -> q32 [label = "Σ" ];
+      q0 -> q18 [label = "i" ];q18 -> q19 [label = "f" ];q19 -> q32 [label = "Σ" ];
+      q0 -> q20 [label = "d" ];q20 -> q21 [label = "o" ];q21 -> q32 [label = "Σ" ];
+     q0 -> q22 [label = "s" ];q22 -> q23 [label = "w" ]; q23 -> q24 [label = "i" ]; q24 -> q25 [label = "t" ];q25 -> q26 [label = "c" ];q26 -> q27 [label = "h" ];q27 -> q32 [label = "Σ" ];
+     q0 -> q28 [label = "c" ];q28 -> q29 [label = "a" ]; q29 -> q30 [label = "s" ]; q30 -> q31 [label = "e" ];q31 -> q32 [label = "Σ" ];
+      q0 -> q32 [label = "Σ-w-f-i-d-s-c" ];
+      q10 -> q32 [label = "Σ-h" ];q11 -> q32 [label = "Σ-i" ];q12 -> q32 [label = "Σ-l" ];q13 -> q32 [label = "Σ-e" ];
+      q15 -> q32 [label = "Σ-o" ];q16 -> q32 [label = "Σ-r" ];
+      q18 -> q32 [label = "Σ-f" ];
+      q20 -> q32 [label = "Σ-o" ];
+      q22 -> q32 [label = "Σ-w" ];q23 -> q32 [label = "Σ-i" ];q24 -> q32 [label = "Σ-t" ];q25 -> q32 [label = "Σ-c" ];q26 -> q32 [label = "Σ-h" ];
+  q28 -> q32 [label = "Σ-a" ];q29 -> q32 [label = "Σ-s" ];q30 -> q32 [label = "Σ-e" ];
+  q0 -> q33 [label = "+,-" ];q33 -> q34 [label = "0..9" ];q34 -> q34 [label = "0..9" ];q34 -> q35 [label = "." ];q35 -> q35 [label = "0..9" ];
+  q0 -> q34 [label = "0..9" ];
+      q0 -> q36 [label = "." ];q36 -> q35 [label = "0..9" ];
+node [shape = none, label=""];
+	 s -> q0 ;
+
+
+      }
+ 
